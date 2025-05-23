@@ -1,6 +1,8 @@
 # chip8-js
 A vanilla JavaScript Chip8 emulator/interpreter
 
+### [Try it here](https://sinthteck.github.io/chip8-js/)
+
 ### Description
 Just as mentioned above, this is a *very simple* vanilla JS Chip8 emulator/interpreter which I decided to implement just for the sake of curiosity. I saw everyone mentioning how easy it is to implement a Chip8 interpreter, so I thought I'd give it a shot using a language which is the furthest thing to being the optimal choice for this purpose.
 
