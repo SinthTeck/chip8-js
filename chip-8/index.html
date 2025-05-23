@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chip-8 Emulator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 720px;
+    }
+
+    input[type="file"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      background-color: #fafafa;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+      border-color: #888;
+    }
+
+    canvas {
+      border: 10px solid #ccc;
+      background-color: #000;
+    }
+
+    .references {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .references h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .references ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .references li {
+      margin: 0.5rem 0;
+    }
+
+    .references a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    .references a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Chip-8 Emulator</h1>
+    <input id="rom" type="file" accept=".ch8"/>
+    <canvas id="canvas" width="640" height="320"></canvas>
+  </div>
+
+  <section class="references">
+    <h2>References</h2>
+    <ul>
+      <li><a href="https://tobiasvl.github.io/blog/write-a-chip-8-emulator/" target="_blank">Guide to making a CHIP-8 emulator - Tobias V. Langhoff</a></li>
+      <li><a href="https://github.com/kripod/chip8-roms" target="_blank">Chip-8 ROM Collection</a></li>
+      <li><a href="https://github.com/Timendus/chip8-test-suite" target="_blank">Chip-8 Test ROMs</a></li>
+    </ul>
+  </section>
+
+  <script src="./script.js"></script>
+  <script>
+    const chip8 = new Chip8();
+    document.getElementById('rom').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const rom = new Uint8Array(e.target.result);
+        chip8.run(rom);
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  </script>
+</body>
+</html>
