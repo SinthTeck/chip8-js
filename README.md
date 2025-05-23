@@ -17,3 +17,5 @@ The emulator might not be perfect: it has been tested against the most common te
 ### Known issues
 - Sound is not working: since this was implemented in vanilla JS, I haven't been able to trigger sound programmatically. I worked around this by logging a nice "BEEP" in the console for every tick the sound would have been played for. Cute, right?
 - Performance is not the best: you might find around other emulators with better performance. If you have any idea on how I can improve performance without adding complexity to the code, suggestions are very welcome!
+
+
