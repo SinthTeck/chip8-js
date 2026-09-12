@@ -15,7 +15,7 @@ const FONT = [
     [0xE0, 0x90, 0x90, 0x90, 0xE0], // D
     [0xF0, 0x80, 0xF0, 0x80, 0xF0], // E
     [0xF0, 0x80, 0xF0, 0x80, 0x80]  // F
-]
+];
 
 class Memory {
     constructor() {
@@ -42,7 +42,7 @@ class Memory {
 
 class Stack {
     constructor() {
-        this.stack = []
+        this.stack = [];
     }
 
     push(value) {
@@ -59,7 +59,7 @@ class Timer {
         this.value = 0x00;
         setInterval(()=>{
             this.decrement();
-        }, 17)
+        }, 17);
     }
 
     set(value) {
@@ -80,7 +80,7 @@ class Timer {
 class SoundTimer extends Timer{
     decrement() {
         if(this.value>0){
-            console.log("BEEP")
+            console.log("BEEP");
             this.value -= 0x01;
         }
     }
@@ -88,9 +88,9 @@ class SoundTimer extends Timer{
 
 class Display {
     constructor() {
-        this.pixels = []
+        this.pixels = [];
         for(let i = 0; i<32; i++) {
-            this.pixels.push([])
+            this.pixels.push([]);
             for(let j = 0; j<64; j++) {
                 this.pixels[i].push(0x00);
             }
@@ -173,7 +173,7 @@ class Chip8 {
             0x00,
             0x00,
             0x00,
-        ]
+        ];
 
         this.display = new Display();
 
@@ -186,7 +186,7 @@ class Chip8 {
 
     fetch() {
         let i1 = this.memory.get(this.PC);
-        let i2 = this.memory.get(this.PC + 0x0001)
+        let i2 = this.memory.get(this.PC + 0x0001);
         this.PC += 0x0002;
         return (i1<<8) | i2;
     }
@@ -262,7 +262,7 @@ class Chip8 {
                             this.V[X] = this.V[X] - this.V[Y];
                             this.V[0xF] = 1;
                         } else {
-                            this.V[X] = 256 + (this.V[X] - this.V[Y])
+                            this.V[X] = 256 + (this.V[X] - this.V[Y]);
                             this.V[0xF] = 0;
                         }
                         break;
@@ -277,7 +277,7 @@ class Chip8 {
                             this.V[X] = this.V[Y] - this.V[X];
                             this.V[0xF] = 1;
                         } else {
-                            this.V[X] = 256 + (this.V[Y] - this.V[X])
+                            this.V[X] = 256 + (this.V[Y] - this.V[X]);
                             this.V[0xF] = 0;
                         }
                         break;
@@ -432,14 +432,14 @@ class Chip8 {
 
         document.addEventListener('keyup', (ev) => {
             this.keyPressed = null;
-        })
+        });
 
         const step = () => {
             let instruction = this.fetch();
             this.decode_and_execute(instruction);
             this.display.render();
-        }
-        
+        };
+
         setInterval(step, 0);
     }
 }
